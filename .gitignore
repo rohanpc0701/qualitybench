@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+venv/
+
+# Model weights (too large for git)
+models/
+*.gguf
+*.bin
+*.safetensors
+
+# Results (commit selectively -- keep final JSON, ignore raw latency files)
+results/lm_eval/
+results/*_latencies.json
+
+# MLflow local runs
+mlruns/
+mlartifacts/
+
+# W&B
+wandb/
+
+# Colab cache
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

@@ -1,0 +1,56 @@
+# QualityBench - Pinned dependencies
+# Last verified: March 2026 on Google Colab T4 (CUDA 12.2)
+# Install order matters for GPU builds -- see README.
+
+# -----------------------------------------------------------------------
+# Core ML
+# -----------------------------------------------------------------------
+torch==2.2.2
+torchvision==0.17.2
+# NOTE: install torch first before bitsandbytes
+
+# -----------------------------------------------------------------------
+# Inference backends
+# -----------------------------------------------------------------------
+transformers==4.40.2
+accelerate==0.29.3
+bitsandbytes==0.43.1          # INT8 and INT4-NF4 quantization
+
+# vLLM: install separately in Colab due to CUDA build requirements
+# pip install vllm==0.4.2
+# (pinned here for reference only -- Colab installs via cell magic)
+vllm==0.4.2
+
+# llama-cpp-python: GPU build requires CMAKE_ARGS env var (see README)
+# CMAKE_ARGS="-DLLAMA_CUDA=on" pip install llama-cpp-python==0.2.77
+llama-cpp-python==0.2.77
+
+# AutoGPTQ for INT4-GPTQ (alternative to bitsandbytes int4)
+# auto-gptq==0.7.1
+
+# -----------------------------------------------------------------------
+# Evaluation
+# -----------------------------------------------------------------------
+lm-eval==0.4.3                # lm-evaluation-harness (EleutherAI)
+
+# -----------------------------------------------------------------------
+# Experiment tracking
+# -----------------------------------------------------------------------
+mlflow==2.12.2
+# wandb==0.16.6               # alternative; uncomment if using W&B
+
+# -----------------------------------------------------------------------
+# Dashboard
+# -----------------------------------------------------------------------
+streamlit==1.34.0
+plotly==5.21.0
+pandas==2.2.2
+
+# -----------------------------------------------------------------------
+# Utilities
+# -----------------------------------------------------------------------
+numpy==1.26.4
+pyyaml==6.0.1
+tqdm==4.66.2
+nvidia-ml-py3==7.352.0        # Python bindings for nvidia-smi (pynvml)
+datasets==2.19.1              # needed by lm-eval

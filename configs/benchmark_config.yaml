@@ -1,0 +1,61 @@
+# QualityBench Configuration
+# Pin this file alongside pinned requirements.txt for reproducibility.
+
+model:
+  # Change to meta-llama/Meta-Llama-3.1-8B if you have access
+  name: "mistralai/Mistral-7B-v0.1"
+
+backends:
+  - name: hf_transformers
+    quantizations:
+      - fp16
+      - int8
+      - int4
+
+  - name: vllm
+    quantizations:
+      - fp16
+
+  - name: llamacpp
+    # GGUF files must be downloaded separately; see README
+    quantizations:
+      - q4_k_m
+      - q8_0
+
+profiling:
+  prompt: >
+    Explain the concept of gradient descent in machine learning.
+    Include how the learning rate affects convergence and describe
+    the difference between batch, mini-batch, and stochastic variants.
+  max_new_tokens: 128
+  num_warmup_runs: 3
+  num_benchmark_runs: 50   # increase to 100 for final results; 50 is faster for dev
+
+eval:
+  mmlu:
+    num_samples: 100        # 100 for quick signal; use 500+ for publishable numbers
+    num_fewshot: 5
+    subjects:               # informational only; lm-eval runs all mmlu by default
+      - high_school_mathematics
+      - college_physics
+      - computer_science
+      - abstract_algebra
+
+  truthfulqa:
+    num_samples: 50         # full set is 817; 50 gives rough signal
+    num_fewshot: 0          # TruthfulQA is always 0-shot
+
+tracking:
+  # "mlflow" or "wandb" or "none"
+  backend: "mlflow"
+  experiment_name: "qualitybench"
+  # For W&B: set WANDB_API_KEY env var
+  # For MLflow: runs locally by default at ./mlruns; set MLFLOW_TRACKING_URI for remote
+
+hardware:
+  # Document your hardware here for reproducibility
+  gpu: "T4"                 # Google Colab free tier
+  gpu_memory_gb: 16
+  platform: "Google Colab"
+  cuda_version: "12.2"      # update after running: nvcc --version
+  driver_version: ""        # update after running: nvidia-smi
