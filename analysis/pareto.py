@@ -11,14 +11,12 @@ A config is Pareto-optimal if no other config is strictly better on ALL dimensio
 We support 2D and 3D Pareto plots.
 """
 
-import json
 import os
 import sys
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-import plotly.express as px
-from typing import List, Dict, Optional, Tuple
+from typing import List, Tuple
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from evals.eval_utils import load_all_results
@@ -166,7 +164,6 @@ def plot_throughput_vs_memory(df: pd.DataFrame, output_path: str = "results/pare
     2D Pareto plot: Throughput vs GPU Memory.
     Pareto-optimal = high throughput AND low memory.
     """
-    required = ["throughput_tokens_per_sec", "peak_gpu_memory_mb"]
     df = compute_pareto(
         df,
         objectives=[("throughput_tokens_per_sec", "max"), ("peak_gpu_memory_mb", "min")],

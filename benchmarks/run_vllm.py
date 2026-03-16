@@ -14,8 +14,6 @@ import argparse
 import sys
 import os
 import yaml
-import torch
-
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from benchmarks.profiler import Profiler, log_to_tracker
 

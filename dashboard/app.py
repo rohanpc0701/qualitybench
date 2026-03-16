@@ -13,7 +13,6 @@ Deploy: streamlit run dashboard/app.py
 
 import sys
 import os
-import json
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -22,9 +21,6 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from analysis.pareto import (
     build_combined_df,
     compute_pareto,
-    plot_throughput_vs_memory,
-    plot_quality_vs_efficiency,
-    plot_latency_comparison,
 )
 
 # ---------------------------------------------------------------------------

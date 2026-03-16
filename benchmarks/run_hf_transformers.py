@@ -103,7 +103,7 @@ def main():
 
         def generate_fn():
             with torch.inference_mode():
-                output = model.generate(
+                output = model.generate(  # noqa: F821
                     **inputs,
                     max_new_tokens=max_new_tokens,
                     do_sample=False,
