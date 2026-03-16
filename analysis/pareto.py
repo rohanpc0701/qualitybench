@@ -202,7 +202,6 @@ def plot_throughput_vs_memory(df: pd.DataFrame, output_path: str = "results/pare
                 "GPU Memory: %{y:.0f} MB<extra></extra>"
             ),
             name=group_label,
-            text=sub["label"],
         ))
 
     fig.update_layout(
